@@ -5,15 +5,16 @@
 </head>
 <body>
     <h2>Submit your feedback</h2>
-
-    {% if submitted %}
-        <p>Thank you for your feedback!</p>
-    {% endif %}
     
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    {% if sentiment %}
+    <p>Sentiment: {{ sentiment }}</p>
+    {% endif %}
+
 </body>
 </html>
