@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Django specific
+*.log
+db.sqlite3
+media/
+staticfiles/
+
+# Secrets
+*.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+
+# macOS files
+.DS_Store
+
+# Node (if you add React later)
+node_modules/
