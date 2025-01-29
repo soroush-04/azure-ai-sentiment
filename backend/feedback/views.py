@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import FeedbackForm
 from .azure_text_analytics import analyze_sentiment
+from feedback.azure_speech import text_to_speech
 
 def feedback_view(request):
     if request.method == "POST":
@@ -8,6 +9,7 @@ def feedback_view(request):
         if form.is_valid():
             feedback_text = form.cleaned_data['feedback']
             sentiment = analyze_sentiment(feedback_text)
+            text_to_speech(feedback_text)
             # print(form.cleaned_data)  # Just printing for now
             return render(request, 'feedback/feedback_form.html', {'form': form, 'sentiment': sentiment})
     else:
