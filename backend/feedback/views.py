@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import FeedbackForm
 from .azure_text_analytics import analyze_sentiment
-from feedback.azure_speech import text_to_speech
+from .azure_speech import text_to_speech
 
 def feedback_view(request):
     if request.method == "POST":
