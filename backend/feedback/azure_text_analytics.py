@@ -1,18 +1,12 @@
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 from django.conf import settings
-import environ
 import os
 
 # Azure API credentials
 def authenticate_client():
-    # key = str(settings.AZURE_TEXT_ANALYTICS_KEY) # must be string to prevent key TypeError
-    # endpoint = str(settings.AZURE_TEXT_ANALYTICS_ENDPOINT)  # must be string to prevent key TypeError
-    # print(f"Endpoint: {endpoint}")
-    
-    key = str(os.getenv("AZURE_TEXT_ANALYTICS_KEY"))
-    endpoint = str(os.getenv("AZURE_TEXT_ANALYTICS_ENDPOINT"))
-    
+    key = str(os.getenv("AZURE_TEXT_ANALYTICS_KEY"))  # must be string to prevent key TypeError
+    endpoint = str(os.getenv("AZURE_TEXT_ANALYTICS_ENDPOINT"))  # must be string to prevent key TypeError
     credential = AzureKeyCredential(key)
     client = TextAnalyticsClient(endpoint=endpoint, credential=credential)
     return client

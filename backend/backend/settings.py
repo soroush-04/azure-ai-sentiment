@@ -19,8 +19,6 @@ load_dotenv()
 # .env variables
 AZURE_TEXT_ANALYTICS_KEY = os.getenv("AZURE_TEXT_ANALYTICS_KEY")
 AZURE_TEXT_ANALYTICS_ENDPOINT = os.getenv("AZURE_TEXT_ANALYTICS_ENDPOINT")
-print(AZURE_TEXT_ANALYTICS_KEY)
-print(AZURE_TEXT_ANALYTICS_ENDPOINT)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
