@@ -15,5 +15,10 @@
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    {% if sentiment %}
+    <p>Sentiment: {{ sentiment }}</p>
+    {% endif %}
+
 </body>
 </html>
