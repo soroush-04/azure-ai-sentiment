@@ -1,25 +1,3 @@
-# import os
-# import azure.cognitiveservices.speech as speechsdk
-
-# def text_to_speech(text: str):
-#     key = os.getenv("AZURE_SPEECH_KEY")
-#     region = os.getenv("AZURE_SPEECH_REGION")
-
-#     if not key or not region:
-#         raise ValueError("Azure Speech key or region is not set in environment variables.")
-
-#     speech_config = speechsdk.SpeechConfig(subscription=key, region=region)
-
-#     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
-
-#     result = synthesizer.speak_text_async(text).get()
-
-#     if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-#         print("Text-to-Speech synthesis completed.")
-#     else:
-#         print(f"Speech synthesis failed: {result.error_details}")
-#         raise Exception(f"Speech synthesis error: {result.error_details}")
-
 import os
 import azure.cognitiveservices.speech as speechsdk
 from .azure_text_analytics import analyze_sentiment
