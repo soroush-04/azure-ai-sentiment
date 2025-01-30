@@ -1,12 +1,26 @@
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [feedback, setFeedback] = useState("");
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Feedback submitted:", feedback);
-    setFeedback(""); //clear
+    
+    try {
+      const result = await axios.post("http://localhost:8000/submit-feedback/", {
+        feedback: feedback,
+      });
+
+      setResponse(result.data);
+      setError(null);
+      // setFeedback(""); //clear
+    } catch (error) {
+      setError(error.response ? error.response.data : "Something went wrong!");
+      setResponse(null);
+    }
   };
 
   return (
@@ -21,10 +35,22 @@ function App() {
           style={{ width: "100%", padding: "10px" }}
         />
         <br />
-        <button type="submit" style={{ marginTop: "10px", padding: "8px 16px" }}>
+        <button
+          type="submit"
+          style={{ marginTop: "10px", padding: "8px 16px", cursor: "pointer" }}
+        >
           Submit
         </button>
       </form>
+
+      {response && (
+        <div style={{ marginTop: "20px" }}>
+          <h3>Sentiment: {response.sentiment}</h3>
+          <p>Generated Response: {response.response_text}</p>
+        </div>
+      )}
+
+      {error && <p style={{ color: "red", marginTop: "20px" }}>{error}</p>}
     </div>
   );
 }
