@@ -42,22 +42,21 @@ function App() {
     }
   };
 
-
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
+    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h2>Submit Your Feedback</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <textarea
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
           placeholder="Share your feedback with us ..."
           rows="5"
-          style={{ width: "100%", padding: "10px" }}
+          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
         <br />
         <button
           type="submit"
-          style={{ marginTop: "10px", padding: "8px 16px", cursor: "pointer" }}
+          style={{ padding: "8px 16px", cursor: "pointer" }}
         >
           Submit
         </button>
@@ -66,7 +65,7 @@ function App() {
       <p><strong>Sentiment:</strong> {response.sentiment}</p>
 
       {response && (
-        <div style={{ marginTop: "60px", textAlign: "center" }}>
+        <div style={{ marginTop: "20px", textAlign: "center", width: "100%" }}>
           <h3>Generated Response</h3>
           <div style={{
             border: "1px solid #ccc",
@@ -84,12 +83,12 @@ function App() {
             >
               Play
             </button>
-            <button
+            {/* <button
               style={{ padding: "8px 16px", cursor: "pointer" }}
               onClick={() => alert('Download button clicked')}
             >
               Download
-            </button>
+            </button> */}
           </div>
         </div>
       )}
