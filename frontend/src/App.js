@@ -27,6 +27,22 @@ function App() {
     }
   };
 
+  const handlePlay = async () => {
+    if (response.response_text) {
+      try {
+        const result = await axios.post("http://localhost:8000/submit-feedback/", {
+          feedback: response.response_text,
+        });
+
+        setResponse(prev => ({ ...prev, audio_url: result.data.audio_url }));
+        setError(null);
+      } catch (error) {
+        setError(error.response ? error.response.data : "Something went wrong!");
+      }
+    }
+  };
+
+
   return (
     <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
       <h2>Submit Your Feedback</h2>
@@ -64,7 +80,7 @@ function App() {
           <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
             <button
               style={{ padding: "8px 16px", cursor: "pointer", marginRight: "10px" }}
-              onClick={() => alert('Play button clicked')}
+              onClick={handlePlay}
             >
               Play
             </button>
