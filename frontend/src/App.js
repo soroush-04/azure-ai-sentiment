@@ -3,7 +3,11 @@ import axios from "axios";
 
 function App() {
   const [feedback, setFeedback] = useState("");
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState({
+    sentiment: "",
+    response_text: "",
+    audio_url: "http://example.com/audio.mp3"
+  });
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -43,10 +47,34 @@ function App() {
         </button>
       </form>
 
+      <p><strong>Sentiment:</strong> {response.sentiment}</p>
+
       {response && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Sentiment: {response.sentiment}</h3>
-          <p>Generated Response: {response.response_text}</p>
+        <div style={{ marginTop: "60px", textAlign: "center" }}>
+          <h3>Generated Response</h3>
+          <div style={{
+            border: "1px solid #ccc",
+            padding: "10px",
+            borderRadius: "4px",
+            backgroundColor: "#f9f9f9",
+            minHeight: "100px"
+          }}>
+            <p>{response.response_text}</p>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+            <button
+              style={{ padding: "8px 16px", cursor: "pointer", marginRight: "10px" }}
+              onClick={() => alert('Play button clicked')}
+            >
+              Play
+            </button>
+            <button
+              style={{ padding: "8px 16px", cursor: "pointer" }}
+              onClick={() => alert('Download button clicked')}
+            >
+              Download
+            </button>
+          </div>
         </div>
       )}
 
