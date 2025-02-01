@@ -19,13 +19,15 @@ def generate_response(feedback_text):
     
     estimated_tokens = len(full_prompt.split()) * 2
     max_tokens = min(max(estimated_tokens, 150), 300)
+    
+    full_prompt_with_limit = f"{full_prompt} (Please respond within {max_tokens} tokens.)"
 
     try:
         response = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": full_prompt}
+                {"role": "user", "content": full_prompt_with_limit}
             ],
             max_tokens=max_tokens,
             n=1,
