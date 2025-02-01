@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import './App.css';
 
 function App() {
   const [feedback, setFeedback] = useState("");
@@ -43,57 +44,35 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div className="container">
       <h2>Submit Your Feedback</h2>
-      <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <form onSubmit={handleSubmit}>
         <textarea
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
           placeholder="Share your feedback with us ..."
           rows="5"
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
-        <br />
-        <button
-          type="submit"
-          style={{ padding: "8px 16px", cursor: "pointer" }}
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
 
-      <p><strong>Sentiment:</strong> {response.sentiment}</p>
+      <p className="sentiment"><strong>Sentiment:</strong> {response.sentiment}</p>
 
       {response && (
-        <div style={{ marginTop: "20px", textAlign: "center", width: "100%" }}>
+        <div className="response-box">
           <h3>Generated Response</h3>
-          <div style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            borderRadius: "4px",
-            backgroundColor: "#f9f9f9",
-            minHeight: "100px"
-          }}>
+          <div className="response-text">
             <p>{response.response_text}</p>
           </div>
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
-            <button
-              style={{ padding: "8px 16px", cursor: "pointer", marginRight: "10px" }}
-              onClick={handlePlay}
-            >
+          <div className="play-button-container">
+            <button className="play-button" onClick={handlePlay}>
               Play
             </button>
-            {/* <button
-              style={{ padding: "8px 16px", cursor: "pointer" }}
-              onClick={() => alert('Download button clicked')}
-            >
-              Download
-            </button> */}
           </div>
         </div>
       )}
 
-      {error && <p style={{ color: "red", marginTop: "20px" }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }
