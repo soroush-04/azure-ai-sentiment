@@ -62,6 +62,10 @@ button {
   border: none;
 }
 
+button:disabled {
+  background-color: grey;
+}
+
 button:hover {
   background-color: #45a049;
 }
