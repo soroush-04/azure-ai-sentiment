@@ -5,24 +5,31 @@ from .azure_text_analytics import analyze_sentiment
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_response(feedback_text):
-
     sentiment = analyze_sentiment(feedback_text)
 
-    if sentiment == 'positive':
-        prompt = f"The user is happy. Respond positively to this feedback: {feedback_text}"
-    elif sentiment == 'negative':
-        prompt = f"The user is unhappy. Respond empathetically to this feedback: {feedback_text}"
-    else:
-        prompt = f"The user is neutral. Provide a balanced response to this feedback: {feedback_text}"
+    sentiment_prompts = {
+        'positive': "The user is satisfied. Respond in a positive and encouraging tone.",
+        'negative': "The user is dissatisfied. Respond empathetically and offer solutions.",
+        'neutral': "The user is neutral. Respond with a helpful and balanced tone."
+    }
+
+    # if the sentiment is unknown
+    prompt = sentiment_prompts.get(sentiment, "The user's sentiment is unclear. Provide a polite and neutral response.")
+    full_prompt = f"{prompt} Feedback: {feedback_text}"
+    
+    estimated_tokens = len(full_prompt.split()) * 2
+    max_tokens = min(max(estimated_tokens, 150), 300)
+    
+    full_prompt_with_limit = f"{full_prompt} (Please respond within {max_tokens} tokens.)"
 
     try:
         response = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": prompt}
+                {"role": "user", "content": full_prompt_with_limit}
             ],
-            max_tokens=100,
+            max_tokens=max_tokens,
             n=1,
             temperature=0.7
         )
