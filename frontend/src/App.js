@@ -21,7 +21,6 @@ function App() {
 
       setResponse(result.data);
       setError(null);
-      // setFeedback(""); //clear
     } catch (error) {
       setError(error.response ? error.response.data : "Something went wrong!");
       setResponse(null);
@@ -46,14 +45,16 @@ function App() {
   return (
     <div className="container">
       <h2>Submit Your Feedback</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-container">
         <textarea
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
           placeholder="Share your feedback with us ..."
-          rows="5"
+          className="textarea"
         />
+        <div className="button-container">
         <button type="submit">Submit</button>
+        </div>
       </form>
 
       <p className="sentiment"><strong>Sentiment:</strong> {response.sentiment}</p>
@@ -64,7 +65,7 @@ function App() {
           <div className="response-text">
             <p>{response.response_text}</p>
           </div>
-          <div className="play-button-container">
+          <div className="button-container">
             <button className="play-button" onClick={handlePlay}>
               Play
             </button>
