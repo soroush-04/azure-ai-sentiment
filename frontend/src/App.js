@@ -44,6 +44,10 @@ function App() {
 
   return (
     <div className="container">
+      {/* <div className="header">
+        Soroush Kami <br />
+        Full Stack Developer for AI Solution
+      </div> */}
       <h2>Submit Your Feedback</h2>
       <form onSubmit={handleSubmit} className="form-container">
         <textarea
