@@ -33,7 +33,11 @@ SECRET_KEY = 'django-insecure-6a$bx7csca19h93gf)5uf)vvtyqjzj@&fz(*te_b()^au_=5jd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    'basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net'
+]
 
 
 # Application definition
@@ -136,3 +140,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CSRF_TRUSTED_ORIGINS = ['*']
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
