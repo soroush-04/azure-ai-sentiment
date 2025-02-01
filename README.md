@@ -6,7 +6,10 @@
 
 <!--ts-->
   - [Scenarios](#scenarios)
+    - [scenario 1 ](#scenario-1)
+    - [scenario 2 ](#scenario-2)
   - [Project](#project)
+  - [References](#references)
   <!-- - [References](#references) -->
 <!--te-->
 
@@ -16,7 +19,7 @@
 
 ## Scenarios<a id="scenarios"></a>
 
-### AI-based Proof-of-Concept Coordination
+### AI-based Proof-of-Concept Coordination<a id="scenario-1"></a>
 
 To address negative user feedback and improve our AI sytems productivity, we need to identify the root causes. The performance of the AI system can be broken down into five main areas:
 
@@ -33,7 +36,7 @@ Once we have a better understanding of the root causes, we can implement more re
 - **Model Training**: If issues are found with instruction tracking or writing quality, we can focus on fine-tuning the model with specific training data to address those weaknesses.
 
 
-### Future of Food and Farming (2030)  
+### Future of Food and Farming (2030) <a id="scenario-2"></a>
 
 Balancing productivity and sustainability is a major challenge for farmers. By 2030, factors like climate change, resource scarcity, pollution, Loss of biodiversity, and population growth will make food systems even more unsustainable.  
 
@@ -53,3 +56,13 @@ Generative AI can revolutionize farming by creating **adaptive, data-driven ecos
 - **AI-driven supply chain optimization** predicts demand, reduces food waste, and streamlines distribution for faster and more sustainable food delivery.  
 
 By continuously learning from real-world data, AI can **simulate future scenarios**, helping farmers adapt to climate shifts, prevent crop failures, and maximize yields, while reducing environmental impact.
+
+
+## References<a id="references"></a>
+
+1. [BASF Agriculture](https://agriculture.basf.com/ca/en)  
+2. [XCube Labs - The Future of AgriTech](https://www.xcubelabs.com/blog/understanding-agritech-the-future-of-agriculture-technology/)  
+3. [EU Food 2030 Initiative](https://research-and-innovation.ec.europa.eu/research-area/environment/bioeconomy/food-systems/food-2030_en)  
+4. [Azure Sentiment Analysis](https://learn.microsoft.com/en-us/azure/ai-services/language-service/sentiment-opinion-mining/overview?tabs=prebuilt)  
+5. [Azure Speech Synthesis](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup)  
+6. [Azure Text-to-Speech Language Support](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts#text-to-speech?azure-portal=true)  
