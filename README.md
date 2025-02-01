@@ -1,7 +1,7 @@
 # Technical Project - Full Stack Developer in AI
 ---
 
-<u>Table of contents</u>
+#### <u>Submitted Date: </u>
 =======
 
 <!--ts-->
@@ -9,6 +9,9 @@
     - [scenario 1 ](#scenario-1)
     - [scenario 2 ](#scenario-2)
   - [Project](#project)
+    - [Objective](#objective)
+    - [Tech Stack](#tech-stack)
+    - [Setup & Configuration](#setup-config)
   - [References](#references)
   <!-- - [References](#references) -->
 <!--te-->
@@ -29,11 +32,12 @@ To address negative user feedback and improve our AI sytems productivity, we nee
 4. **Adherence to Instructions**: Ensure the AI follows the instructions given in the prompt and stays on task.
 5. **Writing Quality**: Review the grammar, clarity, and structure of the response. Also, check if the AI uses inappropriate, aggressive, or absuive language or phrases.
 
-Once we have a better understanding of the root causes, we can implement more reliable approaches to improve the AI system. Based on the issues identified in each key area, we can focus on specific enhancements:
+Based on the issues identified in each key area, we can focus on specific enhancements:
 
 - **Prompt Engineering**: If issues are found in areas like accuracy, hallucination, or instruction following, we may need to refine the prompts to guide the AI better.
 - **Database Quality**: If the problem lies in accuracy or hallucination, improving the quality and diversity of the available dataset can provide more reliable information.
 - **Model Training**: If issues are found with instruction tracking or writing quality, we can focus on fine-tuning the model with specific training data to address those weaknesses.
+- **Stress Testing**: Pushing AI systems to their limits to detect potential bottlenecks for further enhancements.  
 
 
 ### Future of Food and Farming (2030) <a id="scenario-2"></a>
@@ -56,6 +60,21 @@ Generative AI can revolutionize farming by creating **adaptive, data-driven ecos
 - **AI-driven supply chain optimization** predicts demand, reduces food waste, and streamlines distribution for faster and more sustainable food delivery.  
 
 By continuously learning from real-world data, AI can **simulate future scenarios**, helping farmers adapt to climate shifts, prevent crop failures, and maximize yields, while reducing environmental impact.
+
+
+## Project<a id="project"></a>
+### Objective <a id="objective"></a>
+
+The objective of this project is to develop a web application with a minimal dashboard and UI that allows users to submit feedback, analyze sentiment and generate personalized responses in both text and audio, utilizing the GPT-4 large language model (LLM), Azure Cognitive Services, and  optimized prompts.
+### Tech Stack <a id="tech-stack"></a>
+
+- **Backend**: Azure, Django  
+- **Frontend**: React, Axios
+- **Azure Services**: Azure App Service, Azure Static Web App, Azure AI Services (Language, Speech)  
+- **DevOps & Tools**: CI/CD, GitHub Actions, Git, GitHub  
+- **AI**: LLM (GPT-4), Prompt Engineering, Sentiment Analysis
+
+### Setup & Configuration <a id="setup-config"></a>
 
 
 ## References<a id="references"></a>
