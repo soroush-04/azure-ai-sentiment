@@ -6,8 +6,8 @@
 
 <!--ts-->
   - [Scenarios](#scenarios)
-  <!-- - [Development Tools](#devtools) -->
-  <!-- - [User Interface](#ui) -->
+  - [Project](#project)
+  <!-- - [References](#references) -->
 <!--te-->
 
 ---
@@ -32,3 +32,12 @@ Once we have a better understanding of the root causes, we can implement more re
 - **Database Quality**: If the problem lies in accuracy or hallucination, improving the quality and diversity of the available dataset can provide more reliable information.
 - **Model Training**: If issues are found with instruction tracking or writing quality, we can focus on fine-tuning the model with specific training data to address those weaknesses.
 
+
+### Future of Food and Farming (2030)
+
+reduce waste food
+irrigation
+fertilizer
+weather pattern prediction
+soil moist sensors 
+nutrition of the soil 
