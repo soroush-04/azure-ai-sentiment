@@ -9,12 +9,14 @@ function App() {
     response_text: "",
     audio_url: "http://example.com/audio.mp3"
   });
+  const [audio, setAudio] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
+      setAudio(true)
       const result = await axios.post("http://localhost:8000/submit-feedback/", {
         feedback: feedback,
       });
@@ -25,11 +27,15 @@ function App() {
       setError(error.response ? error.response.data : "Something went wrong!");
       setResponse(null);
     }
+    finally {
+      setAudio(false)
+    }
   };
 
   const handlePlay = async () => {
     if (response.response_text) {
       try {
+        setAudio(true)
         const result = await axios.post("http://localhost:8000/submit-feedback/", {
           feedback: response.response_text,
         });
@@ -38,6 +44,9 @@ function App() {
         setError(null);
       } catch (error) {
         setError(error.response ? error.response.data : "Something went wrong!");
+      }
+      finally {
+        setAudio(false)
       }
     }
   };
@@ -57,7 +66,7 @@ function App() {
           className="textarea"
         />
         <div className="button-container">
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={audio}>Submit</button>
         </div>
       </form>
 
@@ -70,7 +79,7 @@ function App() {
             <p>{response.response_text}</p>
           </div>
           <div className="button-container">
-            <button className="play-button" onClick={handlePlay}>
+            <button disabled={audio} className="play-button" onClick={handlePlay}>
               Play
             </button>
           </div>
