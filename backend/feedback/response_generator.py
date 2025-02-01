@@ -15,8 +15,10 @@ def generate_response(feedback_text):
 
     # if the sentiment is unknown
     prompt = sentiment_prompts.get(sentiment, "The user's sentiment is unclear. Provide a polite and neutral response.")
-
     full_prompt = f"{prompt} Feedback: {feedback_text}"
+    
+    estimated_tokens = len(full_prompt.split()) * 2
+    max_tokens = min(max(estimated_tokens, 150), 300)
 
     try:
         response = openai.chat.completions.create(
@@ -25,7 +27,7 @@ def generate_response(feedback_text):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": full_prompt}
             ],
-            max_tokens=150,
+            max_tokens=max_tokens,
             n=1,
             temperature=0.7
         )
