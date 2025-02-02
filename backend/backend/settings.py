@@ -149,4 +149,7 @@ CORS_ALLOWED_ORIGINS = [
 # CSRF_TRUSTED_ORIGINS = ['*']
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = '/home/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+os.makedirs("/home/media/", exist_ok=True)
