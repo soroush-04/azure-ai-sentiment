@@ -1,7 +1,8 @@
 # Technical Project - Full Stack Developer in AI
 ---
 
-#### Live URL: 
+#### Live URL: [https://victorious-beach-00bf7640f.4.azurestaticapps.net/](https://victorious-beach-00bf7640f.4.azurestaticapps.net/) <small>(deploy locally to test text to speech features)</small>
+
 #### <u>Submitted Date: </u>
 =======
 
