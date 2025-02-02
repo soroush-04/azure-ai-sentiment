@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - BASF-app-service
 on:
   push:
     branches:
-      - main
+      - send-audio
   workflow_dispatch:
 
 jobs:
