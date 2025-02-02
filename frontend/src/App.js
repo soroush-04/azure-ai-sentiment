@@ -83,16 +83,11 @@ function App() {
     link.click();
     document.body.removeChild(link);
   
-    // Show a success message
     alert("Download started!");
   };  
 
   return (
     <div className="container">
-      {/* <div className="header">
-        Soroush Kami <br />
-        Full Stack Developer for AI Solution
-      </div> */}
       <h2>Submit Your Feedback</h2>
       <form onSubmit={handleSubmit} className="form-container">
         <textarea
@@ -124,7 +119,6 @@ function App() {
           </div>
         </div>
       )}
-
       {error && <p className="error-message">{error}</p>}
     </div>
   );

@@ -1,6 +1,5 @@
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
-from django.conf import settings
 import os
 
 # Azure API credentials
