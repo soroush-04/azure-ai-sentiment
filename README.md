@@ -66,7 +66,8 @@ By continuously learning from real-world data, AI can **simulate future scenario
 ## Project<a id="project"></a>
 ### Objective <a id="objective"></a>
 
-The objective of this project is to develop a web application with a minimal dashboard and UI that allows users to submit feedback, analyze sentiment and generate personalized responses in both text and audio, utilizing the GPT-4 large language model (LLM), Azure Cognitive Services, and  optimized prompts.
+The objective of this project is to develop a web application with a minimal dashboard and UI that allows users to submit feedback, analyze sentiment, and generate personalized responses in both text and audio by utilizing the GPT-4 large language model (LLM), Azure Cognitive Services, and optimized prompts. The text-to-speech feature uses Azure Speech and SSML to provide an emotional and engaging experience.
+
 ### Tech Stack <a id="tech-stack"></a>
 
 - **Backend**: Azure, Django  
