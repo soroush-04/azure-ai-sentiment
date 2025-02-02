@@ -3,7 +3,7 @@ import azure.cognitiveservices.speech as speechsdk
 from .azure_text_analytics import analyze_sentiment
 from django.conf import settings
 
-def text_to_speech(text):
+def text_to_speech(text, sentiment):
     """Convert text to speech using Azure Speech Service."""
     
     speech_key = str(os.getenv('AZURE_SPEECH_KEY'))
@@ -12,15 +12,40 @@ def text_to_speech(text):
     if not speech_key or not speech_region:
         raise ValueError("Azure Speech credentials are missing. Check SPEECH_KEY and SPEECH_REGION.")
     
-    sentiment = analyze_sentiment(text)  # This function should return 'positive', 'negative', or 'neutral'
+    # sentiment = analyze_sentiment(text)  # This function should return 'positive', 'negative', or 'neutral'
 
     # BONUS: customized text to speech based on sentiment
     if sentiment == 'positive':
         voice_name = 'en-US-JennyNeural'
+        prosody_rate = "medium"
+        prosody_pitch = "medium"
+        prosody_volume = "loud"
+        style="excited"
     elif sentiment == 'negative':
-        voice_name = 'en-US-GuyNeural'
+        voice_name = 'en-US-JennyNeural'
+        prosody_rate = "medium"
+        prosody_pitch = "low"
+        prosody_volume = "medium"
+        style="sad"
     else:
-        voice_name = 'en-US-AvaMultilingualNeural'
+        voice_name = 'en-US-JennyNeural'
+        prosody_rate = "medium"
+        prosody_pitch = "medium"
+        prosody_volume = "medium"
+        style="gentle"
+    
+    # Azure Speech Synthesis Markup Language (SSML) 
+    # use the text in ssml
+    ssml = f"""
+    <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <voice name="en-US-JennyNeural" style="{style}">
+            <prosody rate="{prosody_rate}" pitch="{prosody_pitch}" volume="{prosody_volume}">
+                <s>{text}</s> 
+            </prosody>
+        </voice>
+    </speak>
+    """
+
 
     # speech synthesis configs
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
@@ -31,7 +56,7 @@ def text_to_speech(text):
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
     # Synthesize speech
-    speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
+    speech_synthesis_result = speech_synthesizer.speak_ssml_async(ssml).get()
 
     if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
         print(f"Speech synthesized for text: {text}")
