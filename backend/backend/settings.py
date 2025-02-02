@@ -148,8 +148,14 @@ CORS_ALLOWED_ORIGINS = [
 
 # CSRF_TRUSTED_ORIGINS = ['*']
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = '/home/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# Check if running on Azure App Service
+# WEBSITE_SITE_NAME is an environment variable automatically set by Azure App Service
+if 'WEBSITE_SITE_NAME' in os.environ:
+    MEDIA_ROOT = '/home/media/'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-os.makedirs("/home/media/", exist_ok=True)
+MEDIA_URL = '/media/'
+
+# Ensure the media directory exists
+os.makedirs(MEDIA_ROOT, exist_ok=True)
