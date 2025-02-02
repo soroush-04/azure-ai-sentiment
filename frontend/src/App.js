@@ -105,6 +105,9 @@ function App() {
             <button disabled={audio} className="play-button" onClick={handlePlay}>
               Play
             </button>
+            {/* <button disabled={audio} className="download-button">
+              Download
+            </button> */}
           </div>
         </div>
       )}

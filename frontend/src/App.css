@@ -50,30 +50,36 @@ body {
   /* margin: 20px 0; */
 }
 
-button, .play-button {
+/* button, .play-button, .download-button {
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+} */
+
+button {
+  background-color: #3d4ed1;
+  color: white;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 4px;
 }
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-}
-
 button:disabled {
   background-color: grey;
+  cursor: not-allowed;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2e3ba3;
 }
 
 .button-container {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   margin-top: 10px;
+  gap: 10px;
 }
 
 .error-message {
