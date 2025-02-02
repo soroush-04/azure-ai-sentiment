@@ -15,17 +15,17 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    try {
-      setAudio(true)
-      const result = await axios.post("http://localhost:8000/submit-feedback/", {
-        feedback: feedback,
-      });
-
     // try {
     //   setAudio(true)
-    //   const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/submit-feedback/", {
+    //   const result = await axios.post("http://localhost:8000/submit-feedback/", {
     //     feedback: feedback,
-      // });
+    //   });
+
+    try {
+      setAudio(true)
+      const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/submit-feedback/", {
+        feedback: feedback,
+      });
 
       setResponse(result.data);
       setError(null);
@@ -40,25 +40,25 @@ function App() {
 
   const handlePlay = async () => {
     if (response.response_text && response.sentiment) {
-      // try {
-      //   setAudio(true)
-      //   const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/play-response/", {
-      //     feedback: response.response_text,
-      //     sentiment: response.sentiment,
-      //   });
-
       try {
         setAudio(true)
-        const result = await axios.post("http://localhost:8000/play-response/", {
+        const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/play-response/", {
           feedback: response.response_text,
           sentiment: response.sentiment,
         });
-        
-        console.log("Audio file URL:", result.data.audio_url);
-        const audioUrl = `http://localhost:8000${result.data.audio_url}`;
 
+      // try {
+      //   setAudio(true)
+      //   const result = await axios.post("http://localhost:8000/play-response/", {
+      //     feedback: response.response_text,
+      //     sentiment: response.sentiment,
+      //   });
+        
         // console.log("Audio file URL:", result.data.audio_url);
-        // const audioUrl = `https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net${result.data.audio_url}`;
+        // const audioUrl = `http://localhost:8000${result.data.audio_url}`;
+
+        console.log("Audio file URL:", result.data.audio_url);
+        const audioUrl = `https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net${result.data.audio_url}`;
 
         const audio = new Audio(audioUrl);
         audio.play();
