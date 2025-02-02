@@ -12,41 +12,7 @@ function App() {
   });
   const [audio, setAudio] = useState(false);
   const [error, setError] = useState(null);
-  const API_URL = config.API_URL; // Use the API_URL from the config file
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-    
-  //   // local
-  //   // try {
-  //   //   setAudio(true)
-  //   //   const result = await axios.post("http://localhost:8000/submit-feedback/", {
-  //   //     feedback: feedback,
-  //   //   });
-
-  //   // azure
-  //   try {
-  //     setAudio(true)
-  //     const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/submit-feedback/", {
-  //       feedback: feedback,
-  //     });
-
-  // //   try {
-  // //     setAudio(true);
-  // //     const result = await axios.post(`${config.API_URL}/submit-feedback/`, {
-  // //       feedback: feedback,
-  // //     });
-
-  //     setResponse(result.data);
-  //     setError(null);
-  //   } catch (error) {
-  //     setError(error.response ? error.response.data : "Something went wrong!");
-  //     setResponse(null);
-  //   }
-  //   finally {
-  //     setAudio(false)
-  //   }
-  // };
+  const API_URL = config.API_URL; // Switch API_URL from the config file
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,42 +31,6 @@ function App() {
       setAudio(false);
     }
   };
-
-  // const handlePlay = async () => {
-  //   if (response.response_text && response.sentiment) {
-  //     try {
-  //       setAudio(true)
-  //       const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/play-response/", {
-  //         feedback: response.response_text,
-  //         sentiment: response.sentiment,
-  //       });
-
-  //     // try {
-  //     //   setAudio(true)
-  //     //   const result = await axios.post("http://localhost:8000/play-response/", {
-  //     //     feedback: response.response_text,
-  //     //     sentiment: response.sentiment,
-  //     //   });
-        
-  //       // console.log("Audio file URL:", result.data.audio_url);
-  //       // const audioUrl = `http://localhost:8000${result.data.audio_url}`;
-
-  //       console.log("Audio file URL:", result.data.audio_url);
-  //       const audioUrl = `https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net${result.data.audio_url}`;
-
-  //       const audio = new Audio(audioUrl);
-  //       audio.play();
-
-  //       setResponse(prev => ({ ...prev, audio_url: result.data.audio_url }));
-  //       setError(null);
-  //     } catch (error) {
-  //       setError(error.response ? error.response.data : "Something went wrong!");
-  //     }
-  //     finally {
-  //       setAudio(false)
-  //     }
-  //   }
-  // };
 
   const handlePlay = async () => {
     if (response.response_text && response.sentiment) {
@@ -126,20 +56,6 @@ function App() {
       }
     }
   };
-
-  // const handleDownload = () => {
-  //   // const audioUrl = "http://localhost:8000/download-audio/";  // URL to the Django view that forces download
-  //   const audioUrl = "https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/download-audio/";
-
-  //   const link = document.createElement("a");
-  //   link.href = audioUrl;
-  //   link.setAttribute("download", "output.mp3");  // Ensure the download attribute is set
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  
-  //   alert("Download started!");
-  // };  
 
   const handleDownload = () => {
     const audioUrl = `${API_URL}/download-audio/`;
