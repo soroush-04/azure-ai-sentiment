@@ -1,7 +1,7 @@
 # Technical Project - Full Stack Developer in AI
 ---
 
-#### Live URL: [https://victorious-beach-00bf7640f.4.azurestaticapps.net/](https://victorious-beach-00bf7640f.4.azurestaticapps.net/) <small>(deploy locally to test text to speech features)</small>
+#### Live URL: [https://victorious-beach-00bf7640f.4.azurestaticapps.net/](https://victorious-beach-00bf7640f.4.azurestaticapps.net/) <small>(deploy backend locally to test text to speech features)</small>
 
 #### <u>Submitted Date: </u>
 =======
@@ -44,7 +44,7 @@ Based on the issues identified in each key area, we can focus on specific enhanc
 
 ### Future of Food and Farming (2030) <a id="scenario-2"></a>
 
-Balancing productivity and sustainability is a major challenge for farmers. By 2030, factors like climate change, resource scarcity, pollution, Loss of biodiversity, and population growth will make food systems even more unsustainable.  
+Balancing productivity and sustainability is a major challenge for farmers. By 2030, factors like climate change, resource scarcity, pollution, loss of biodiversity, and population growth will make food systems even more fragile.  
 
 #### The Role of Agri-Tech  
 
