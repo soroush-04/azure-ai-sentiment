@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import './App.css';
 import config from './config';
@@ -12,11 +12,31 @@ function App() {
   });
   const [audio, setAudio] = useState(false);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [loadingDots, setLoadingDots] = useState(".");
+
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      interval = setInterval(() => {
+        setLoadingDots((prev) => {
+          if (prev === "...") return ".";
+          return prev + ".";
+        });
+      }, 500); // Change dots every 500ms
+    } else {
+      setLoadingDots(".");
+    }
+
+    return () => clearInterval(interval);
+  }, [loading]);
+
   const API_URL = config.API_URL; // Switch API_URL from the config file
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       setAudio(true);
       const result = await axios.post(`${API_URL}/submit-feedback/`, {
         feedback: feedback,
@@ -28,6 +48,7 @@ function App() {
       setError(error.response ? error.response.data : "Something went wrong!");
       setResponse(null);
     } finally {
+      setLoading(false);
       setAudio(false);
     }
   };
@@ -84,24 +105,27 @@ function App() {
         </div>
       </form>
 
-      <p className="sentiment"><strong>Sentiment:</strong> {response.sentiment}</p>
+      <p className="sentiment">
+        <strong>Sentiment:</strong> {""}
+        {loading ? <span className="loading-animation">{loadingDots}</span> : response.sentiment}
+      </p>
 
-      {response && (
-        <div className="response-box">
-          <h3>Generated Response</h3>
-          <div className="response-text">
-            <p>{response.response_text}</p>
-          </div>
-          <div className="button-container">
-            <button disabled={audio} className="play-button" onClick={handlePlay}>
-              Play
-            </button>
-            <button disabled={audio} className="download-button" onClick={handleDownload}>
-              Download
-            </button>
-          </div>
+      <div className="response-box">
+        <h3>Generated Response</h3>
+        <div className="response-text">
+          {loading ? (
+            <p className="loading-animation">{loadingDots}</p>
+          ) : response.response_text}
         </div>
-      )}
+        <div className="button-container">
+          <button disabled={audio} className="play-button" onClick={handlePlay}>
+            Play
+          </button>
+          <button disabled={audio} className="download-button" onClick={handleDownload}>
+            Download
+          </button>
+        </div>
+      </div>
       {error && <p className="error-message">{error}</p>}
     </div>
   );

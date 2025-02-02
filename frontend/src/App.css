@@ -70,3 +70,10 @@ button:hover {
   color: red;
   margin-top: 20px;
 }
+
+.loading-animation {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0;
+}
