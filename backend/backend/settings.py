@@ -140,10 +140,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
-    'https://victorious-beach-00bf7640f.4.azurestaticapps.net',  # Replace with your actual Azure Static Web Apps URL
+    'https://victorious-beach-00bf7640f.4.azurestaticapps.net',
+    'http://localhost:3000',
 ]
 
 # CSRF_TRUSTED_ORIGINS = ['*']
