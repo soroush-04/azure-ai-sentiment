@@ -18,9 +18,9 @@ def generate_response(feedback_text):
     full_prompt = f"{prompt} Feedback: {feedback_text}"
     
     estimated_tokens = len(full_prompt.split()) * 2
-    max_tokens = min(max(estimated_tokens, 150), 300)
+    max_tokens = min(max(estimated_tokens, 140), 230)
     
-    full_prompt_with_limit = f"{full_prompt} (Please respond within {max_tokens} tokens.)"
+    full_prompt_with_limit = f"{full_prompt} (Please respond short and straightforward within {max_tokens} tokens.)"
 
     try:
         response = openai.chat.completions.create(
