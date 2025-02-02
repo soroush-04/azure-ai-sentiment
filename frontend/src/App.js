@@ -75,7 +75,9 @@ function App() {
   };
 
   const handleDownload = () => {
-    const audioUrl = "http://localhost:8000/download-audio/";  // URL to the Django view that forces download
+    // const audioUrl = "http://localhost:8000/download-audio/";  // URL to the Django view that forces download
+    const audioUrl = "https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/download-audio/";
+    
     const link = document.createElement("a");
     link.href = audioUrl;
     link.setAttribute("download", "output.mp3");  // Ensure the download attribute is set
