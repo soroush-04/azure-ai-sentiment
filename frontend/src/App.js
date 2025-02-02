@@ -33,11 +33,12 @@ function App() {
   };
 
   const handlePlay = async () => {
-    if (response.response_text) {
+    if (response.response_text && response.sentiment) {
       try {
         setAudio(true)
         const result = await axios.post("http://localhost:8000/play-response/", {
           feedback: response.response_text,
+          sentiment: response.sentiment,
         });
 
         setResponse(prev => ({ ...prev, audio_url: result.data.audio_url }));

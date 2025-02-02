@@ -55,17 +55,19 @@ def play_response(request):
         try:
             data = json.loads(request.body)
             feedback_text = data.get("feedback", "")
+            sentiment = data.get("sentiment", "")
 
             if not feedback_text:
                 return JsonResponse({"error": "Feedback cannot be empty"}, status=400)
-
-            sentiment = analyze_sentiment(feedback_text)
-            text_to_speech(feedback_text)
-            response_text = generate_response(feedback_text)
+            
+            if not sentiment:
+                return JsonResponse({"error": "Sentiment is missing"}, status=400)
+            
+            text_to_speech(feedback_text, sentiment)
 
             return JsonResponse({
                 "sentiment": sentiment,
-                "response_text": response_text
+                # "response_text": response_text
             })
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)

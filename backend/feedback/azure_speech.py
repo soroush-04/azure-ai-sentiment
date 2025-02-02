@@ -3,7 +3,7 @@ import azure.cognitiveservices.speech as speechsdk
 from .azure_text_analytics import analyze_sentiment
 from django.conf import settings
 
-def text_to_speech(text):
+def text_to_speech(text, sentiment):
     """Convert text to speech using Azure Speech Service."""
     
     speech_key = str(os.getenv('AZURE_SPEECH_KEY'))
@@ -12,7 +12,7 @@ def text_to_speech(text):
     if not speech_key or not speech_region:
         raise ValueError("Azure Speech credentials are missing. Check SPEECH_KEY and SPEECH_REGION.")
     
-    sentiment = analyze_sentiment(text)  # This function should return 'positive', 'negative', or 'neutral'
+    # sentiment = analyze_sentiment(text)  # This function should return 'positive', 'negative', or 'neutral'
 
     # BONUS: customized text to speech based on sentiment
     if sentiment == 'positive':
