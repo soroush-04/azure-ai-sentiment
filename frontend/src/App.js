@@ -74,6 +74,19 @@ function App() {
     }
   };
 
+  const handleDownload = () => {
+    const audioUrl = "http://localhost:8000/download-audio/";  // URL to the Django view that forces download
+    const link = document.createElement("a");
+    link.href = audioUrl;
+    link.setAttribute("download", "output.mp3");  // Ensure the download attribute is set
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  
+    // Show a success message
+    alert("Download started!");
+  };  
+
   return (
     <div className="container">
       {/* <div className="header">
@@ -105,9 +118,9 @@ function App() {
             <button disabled={audio} className="play-button" onClick={handlePlay}>
               Play
             </button>
-            {/* <button disabled={audio} className="download-button">
+            <button disabled={audio} className="download-button" onClick={handleDownload}>
               Download
-            </button> */}
+            </button>
           </div>
         </div>
       )}
