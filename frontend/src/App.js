@@ -53,6 +53,13 @@ function App() {
           feedback: response.response_text,
           sentiment: response.sentiment,
         });
+        
+        console.log("Audio file URL:", result.data.audio_url);
+        const audioUrl = `http://localhost:8000${result.data.audio_url}`;
+
+
+        const audio = new Audio(audioUrl);
+        audio.play();
 
         setResponse(prev => ({ ...prev, audio_url: result.data.audio_url }));
         setError(null);

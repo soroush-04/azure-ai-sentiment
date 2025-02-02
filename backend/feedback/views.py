@@ -1,4 +1,5 @@
 import json
+import os
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -63,12 +64,17 @@ def play_response(request):
             if not sentiment:
                 return JsonResponse({"error": "Sentiment is missing"}, status=400)
             
-            text_to_speech(feedback_text, sentiment)
+            # text_to_speech(feedback_text, sentiment)
+            audio_file_path = text_to_speech(feedback_text, sentiment)
+            audio_url = f"/media/{os.path.basename(audio_file_path)}"
+
+            print(f"this is the url {audio_url}")
 
             return JsonResponse({
                 "sentiment": sentiment,
-                # "response_text": response_text
-            })
+                "audio_url": audio_url,
+                })
+            
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
 
