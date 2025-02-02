@@ -17,10 +17,35 @@ def text_to_speech(text, sentiment):
     # BONUS: customized text to speech based on sentiment
     if sentiment == 'positive':
         voice_name = 'en-US-JennyNeural'
+        prosody_rate = "medium"
+        prosody_pitch = "medium"
+        prosody_volume = "loud"
+        style="excited"
     elif sentiment == 'negative':
-        voice_name = 'en-US-GuyNeural'
+        voice_name = 'en-US-JennyNeural'
+        prosody_rate = "medium"
+        prosody_pitch = "low"
+        prosody_volume = "medium"
+        style="sad"
     else:
-        voice_name = 'en-US-AvaMultilingualNeural'
+        voice_name = 'en-US-JennyNeural'
+        prosody_rate = "medium"
+        prosody_pitch = "medium"
+        prosody_volume = "medium"
+        style="gentle"
+    
+    # Azure Speech Synthesis Markup Language (SSML) 
+    # use the text in ssml
+    ssml = f"""
+    <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <voice name="en-US-JennyNeural" style="{style}">
+            <prosody rate="{prosody_rate}" pitch="{prosody_pitch}" volume="{prosody_volume}">
+                <s>{text}</s> 
+            </prosody>
+        </voice>
+    </speak>
+    """
+
 
     # speech synthesis configs
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
@@ -31,7 +56,7 @@ def text_to_speech(text, sentiment):
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
     # Synthesize speech
-    speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
+    speech_synthesis_result = speech_synthesizer.speak_ssml_async(ssml).get()
 
     if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
         print(f"Speech synthesized for text: {text}")
