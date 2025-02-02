@@ -36,7 +36,7 @@ function App() {
     if (response.response_text) {
       try {
         setAudio(true)
-        const result = await axios.post("http://localhost:8000/submit-feedback/", {
+        const result = await axios.post("http://localhost:8000/play-response/", {
           feedback: response.response_text,
         });
 
