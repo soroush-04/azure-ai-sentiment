@@ -3,11 +3,11 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - play-emotion-sentiment
+      - transfer-audio-file
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - play-emotion-sentiment
+      - transfer-audio-file
 
 jobs:
   build_and_deploy_job:

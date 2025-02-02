@@ -25,7 +25,7 @@ function App() {
     //   setAudio(true)
     //   const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/submit-feedback/", {
     //     feedback: feedback,
-    //   });
+      // });
 
       setResponse(result.data);
       setError(null);
@@ -53,6 +53,15 @@ function App() {
           feedback: response.response_text,
           sentiment: response.sentiment,
         });
+        
+        console.log("Audio file URL:", result.data.audio_url);
+        const audioUrl = `http://localhost:8000${result.data.audio_url}`;
+
+        // console.log("Audio file URL:", result.data.audio_url);
+        // const audioUrl = `https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net${result.data.audio_url}`;
+
+        const audio = new Audio(audioUrl);
+        audio.play();
 
         setResponse(prev => ({ ...prev, audio_url: result.data.audio_url }));
         setError(null);
@@ -80,7 +89,7 @@ function App() {
           className="textarea"
         />
         <div className="button-container">
-        <button type="submit" disabled={audio}>Submit</button>
+        <button type="submit" disabled={audio || !feedback.trim()}>Submit</button>
         </div>
       </form>
 
