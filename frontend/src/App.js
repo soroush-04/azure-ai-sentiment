@@ -21,6 +21,12 @@ function App() {
         feedback: feedback,
       });
 
+    // try {
+    //   setAudio(true)
+    //   const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/submit-feedback/", {
+    //     feedback: feedback,
+    //   });
+
       setResponse(result.data);
       setError(null);
     } catch (error) {
@@ -34,6 +40,13 @@ function App() {
 
   const handlePlay = async () => {
     if (response.response_text && response.sentiment) {
+      // try {
+      //   setAudio(true)
+      //   const result = await axios.post("https://basf-app-service-chgsevh6hqebdjad.canadacentral-01.azurewebsites.net/play-response/", {
+      //     feedback: response.response_text,
+      //     sentiment: response.sentiment,
+      //   });
+
       try {
         setAudio(true)
         const result = await axios.post("http://localhost:8000/play-response/", {
