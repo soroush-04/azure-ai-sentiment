@@ -13,6 +13,7 @@ function App() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loadingDots, setLoadingDots] = useState(".");
+  const [audioInstance, setAudioInstance] = useState(null);
 
   useEffect(() => {
     let interval;
@@ -29,6 +30,16 @@ function App() {
 
     return () => clearInterval(interval);
   }, [loading]);
+
+  // prevent memory leak 
+  useEffect(() => {
+    return () => {
+      if (audioInstance) {
+        audioInstance.pause();
+        audioInstance.currentTime = 0;
+      }
+    };
+  }, [audioInstance]);
 
   const API_URL = config.API_URL; // Switch API_URL from the config file
 
@@ -53,6 +64,12 @@ function App() {
   const handlePlay = async () => {
     if (response.response_text && response.sentiment) {
       try {
+        // fix overlapping audio play
+        if (audioInstance) {
+          audioInstance.pause();
+          audioInstance.currentTime = 0;
+        }
+        
         const result = await axios.post(`${API_URL}/play-response/`, {
           feedback: response.response_text,
           sentiment: response.sentiment,
@@ -61,8 +78,10 @@ function App() {
         console.log("Audio file URL:", result.data.audio_url);
         const audioUrl = `${API_URL}${result.data.audio_url}`;
 
-        const audio = new Audio(audioUrl);
-        audio.play();
+        const newAudio = new Audio(audioUrl);
+        setAudioInstance(newAudio);
+        newAudio.play();
+        
 
         setResponse((prev) => ({ ...prev, audio_url: result.data.audio_url }));
         setError(null);
