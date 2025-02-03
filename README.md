@@ -81,23 +81,33 @@ The objective of this project is to develop a web application with a minimal das
 ### Setup & Configuration <a id="setup-config"></a>
 
 1. **Clone the repository**:  
-   Run this in the root directory:  
-   `git clone https://github.com/soroush-04/azure-ai-sentiment.git`  
+   Run this in the root directory:
+   ```bash
+   git clone https://github.com/soroush-04/azure-ai-sentiment.git
 
-2. **Install required dependencies**:  
-  `cd backend`  
-  `pip install -r requirements.txt` 
+3. **Install required dependencies**:
+    ```bash
+    cd backend
+    python -m venv venv
+    ```
+   macOS/Linux: ```source venv/bin/activate```
+   
+   Windows: ```venv\Scripts\activate```
+   
+    ```python
+   pip install -r requirements.txt`
 
-3. **Place the `.env` file** in the root directory:  
+5. **Place the `.env` file** in the root directory:  
    -- If you don't have access to the `.env` file, you need to set up **Azure Cognitive Services** (Language, Speech), **OpenAI API key**, and other credentials based on the `.env.example` file.  
 
-4. **Run the backend**:  
-  `python3 backend/manage.py runserver`  
+6. **Run the backend**:
+    ```bash
+    python3 backend/manage.py runserver
 
-1. **Run the frontend**: Open a new terminal   
-  `cd frontend`  
-  `npm start`
-
+1. **Run the frontend**: Open a new terminal
+   ```bash
+   cd frontend
+   npm start
 
 ## References<a id="references"></a>
 
