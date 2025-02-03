@@ -31,16 +31,6 @@ function App() {
     return () => clearInterval(interval);
   }, [loading]);
 
-  // prevent memory leak 
-  useEffect(() => {
-    return () => {
-      if (audioInstance) {
-        audioInstance.pause();
-        audioInstance.currentTime = 0;
-      }
-    };
-  }, [audioInstance]);
-
   const API_URL = config.API_URL; // Switch API_URL from the config file
 
   const handleSubmit = async (e) => {
