@@ -10,7 +10,6 @@ function App() {
     response_text: "",
     audio_url: "http://example.com/audio.mp3"
   });
-  const [audio, setAudio] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loadingDots, setLoadingDots] = useState(".");
@@ -37,7 +36,6 @@ function App() {
     e.preventDefault();
     try {
       setLoading(true);
-      setAudio(true);
       const result = await axios.post(`${API_URL}/submit-feedback/`, {
         feedback: feedback,
       });
@@ -49,14 +47,12 @@ function App() {
       setResponse(null);
     } finally {
       setLoading(false);
-      setAudio(false);
     }
   };
 
   const handlePlay = async () => {
     if (response.response_text && response.sentiment) {
       try {
-        setAudio(true);
         const result = await axios.post(`${API_URL}/play-response/`, {
           feedback: response.response_text,
           sentiment: response.sentiment,
@@ -73,7 +69,6 @@ function App() {
       } catch (error) {
         setError(error.response ? error.response.data : "Something went wrong!");
       } finally {
-        setAudio(false);
       }
     }
   };
@@ -101,7 +96,7 @@ function App() {
           className="textarea"
         />
         <div className="button-container">
-        <button type="submit" disabled={audio || !feedback.trim()}>Submit</button>
+        <button type="submit" disabled={!feedback.trim()}>Submit</button>
         </div>
       </form>
 
@@ -118,10 +113,10 @@ function App() {
           ) : response.response_text}
         </div>
         <div className="button-container">
-          <button disabled={audio} className="play-button" onClick={handlePlay}>
+          <button disabled={!response.response_text} className="play-button" onClick={handlePlay}>
             Play
           </button>
-          <button disabled={audio} className="download-button" onClick={handleDownload}>
+          <button disabled={!response.response_text} className="download-button" onClick={handleDownload}>
             Download
           </button>
         </div>
