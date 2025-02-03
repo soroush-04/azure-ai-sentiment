@@ -119,6 +119,12 @@ function App() {
           <button disabled={!response.response_text} className="download-button" onClick={handleDownload}>
             Download
           </button>
+          <button
+            onClick={() => window.open("https://github.com/soroush-04/azure-ai-sentiment", "_blank")}
+            className="button github-button"
+          >
+            GitHub Repository
+          </button>
         </div>
       </div>
       {error && <p className="error-message">{error}</p>}

@@ -64,6 +64,12 @@ button:hover {
   justify-content: right;
   margin-top: 10px;
   gap: 10px;
+  position: relative;
+}
+
+.github-button {
+  position: absolute;
+  left: 0;
 }
 
 .error-message {
