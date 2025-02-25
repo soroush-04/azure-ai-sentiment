@@ -5,6 +5,7 @@
 **Note:** It might take a few moments for the server to start up. Thank you for your patience!
 
 #### <u>Submission Date</u>: February 2, 2025, 9:00 PM EST
+#### <u>Submission Date (v1.1)</u>: February 25, 2025, 6:00 PM EST
 =======
 
 <!--ts-->
@@ -72,7 +73,7 @@ The objective of this project is to develop a web application with a minimal das
 
 ### Tech Stack <a id="tech-stack"></a>
 
-- **Backend**: Azure, Django  
+- **Backend**: Azure, Django, Unit Testing
 - **Frontend**: React, Axios
 - **Azure Services**: Azure App Service, Azure Static Web App, Azure AI Services (Language, Speech)  
 - **DevOps & Tools**: CI/CD, GitHub Actions, Git, GitHub  
