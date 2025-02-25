@@ -1,6 +1,9 @@
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Azure API credentials
 def authenticate_client():
@@ -19,5 +22,5 @@ def analyze_sentiment(feedback_text):
         sentiment = response[0].sentiment  # 'positive', 'neutral', or 'negative'
         return sentiment
     except Exception as e:
-        print("Error in sentiment analysis:", e)
+        logger.error("Error in sentiment analysis: %s", e)
         return None

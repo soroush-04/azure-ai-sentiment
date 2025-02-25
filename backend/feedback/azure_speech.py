@@ -1,14 +1,13 @@
 import os
 import azure.cognitiveservices.speech as speechsdk
-from .azure_text_analytics import analyze_sentiment
 from django.conf import settings
 
 
 def text_to_speech(text, sentiment):
     """Convert text to speech using Azure Speech Service."""
     
-    speech_key = str(os.getenv('AZURE_SPEECH_KEY'))
-    speech_region = str(os.getenv('AZURE_SPEECH_REGION'))
+    speech_key = os.getenv('AZURE_SPEECH_KEY')
+    speech_region = os.getenv('AZURE_SPEECH_REGION')
 
     if not speech_key or not speech_region:
         raise ValueError("Azure Speech credentials are missing. Check SPEECH_KEY and SPEECH_REGION.")
@@ -48,20 +47,14 @@ def text_to_speech(text, sentiment):
 
     # speech synthesis configs
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
-    # audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=False)
-    # speech_config.speech_synthesis_voice_name = voice_name
 
     audio_file_path = os.path.join(settings.MEDIA_ROOT, "output.mp3")
     
     audio_config = speechsdk.audio.AudioOutputConfig(filename=audio_file_path)
     
-    print(f"Generated audio file path: {audio_file_path}")
-    
     # Create speech synthesizer
     speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
-    audio_file_path = os.path.join(settings.MEDIA_ROOT, "output.mp3")
-    
     # Synthesize speech
     speech_synthesis_result = speech_synthesizer.speak_ssml_async(ssml).get()
 
