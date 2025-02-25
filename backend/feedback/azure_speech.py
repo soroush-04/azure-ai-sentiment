@@ -7,8 +7,8 @@ from django.conf import settings
 def text_to_speech(text, sentiment):
     """Convert text to speech using Azure Speech Service."""
     
-    speech_key = str(os.getenv('AZURE_SPEECH_KEY'))
-    speech_region = str(os.getenv('AZURE_SPEECH_REGION'))
+    speech_key = os.getenv('AZURE_SPEECH_KEY')
+    speech_region = os.getenv('AZURE_SPEECH_REGION')
 
     if not speech_key or not speech_region:
         raise ValueError("Azure Speech credentials are missing. Check SPEECH_KEY and SPEECH_REGION.")
