@@ -1,5 +1,6 @@
+import os
 import json
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, mock_open
 import pytest
 from django.http import JsonResponse, FileResponse
 from feedback.views import feedback_api, play_response, download_audio
@@ -159,19 +160,24 @@ def test_play_response_invalid_method():
 
 def test_download_audio_file_exists(mock_os_path_exists, mock_file_response):
     mock_os_path_exists.return_value = True
-    mock_file_response.return_value = MagicMock()
-    
-    mock_response = MagicMock(spec=FileResponse)
-    mock_response.__getitem__.return_value = 'attachment; filename="output.mp3"'
-    mock_response.__setitem__.return_value = 'audio/mpeg'
-    mock_file_response.return_value = mock_response
 
-    request = MagicMock()
-    response = download_audio(request)
+    # fully mock the file opening 
+    mock_file_content = b"mock audio data"
+    with patch("builtins.open", mock_open(read_data=mock_file_content)):
+        mock_response = MagicMock(spec=FileResponse)
+        mock_response.headers = {
+            "Content-Disposition": 'attachment; filename="output.mp3"',
+            "Content-Type": "audio/mpeg",
+        }
+        mock_file_response.return_value = mock_response
 
-    assert isinstance(response, FileResponse)
-    assert response["Content-Disposition"] == 'attachment; filename="output.mp3"'
-    assert response["Content-Type"] == "audio/mpeg"
+        request = MagicMock()
+        response = download_audio(request)
+
+        assert isinstance(response, FileResponse)
+        assert response.headers["Content-Disposition"] == 'attachment; filename="output.mp3"'
+        assert response.headers["Content-Type"] == "audio/mpeg"
+
     
 
 def test_download_audio_file_not_exists(mock_os_path_exists):
