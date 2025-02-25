@@ -160,3 +160,6 @@ MEDIA_URL = '/media/'
 
 # Ensure the media directory exists
 os.makedirs(MEDIA_ROOT, exist_ok=True)
+
+
+DEFAULT_CHARSET = 'utf-8'

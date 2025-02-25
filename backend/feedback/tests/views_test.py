@@ -160,6 +160,11 @@ def test_play_response_invalid_method():
 def test_download_audio_file_exists(mock_os_path_exists, mock_file_response):
     mock_os_path_exists.return_value = True
     mock_file_response.return_value = MagicMock()
+    
+    mock_response = MagicMock(spec=FileResponse)
+    mock_response.__getitem__.return_value = 'attachment; filename="output.mp3"'
+    mock_response.__setitem__.return_value = 'audio/mpeg'
+    mock_file_response.return_value = mock_response
 
     request = MagicMock()
     response = download_audio(request)

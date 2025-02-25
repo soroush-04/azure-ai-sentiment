@@ -12,6 +12,7 @@ def mock_env_azure_speech():
         {
             "AZURE_SPEECH_KEY": "fake-key",
             "AZURE_SPEECH_REGION": "fake-region",
+            "WEBSITE_SITE_NAME": "fake-website", # mock azure deployement
         },
     ):
         yield

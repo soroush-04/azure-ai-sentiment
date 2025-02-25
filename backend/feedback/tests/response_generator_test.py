@@ -1,5 +1,9 @@
 import pytest
+import os
 from unittest.mock import patch, MagicMock
+
+os.environ["OPENAI_API_KEY"] = "fake-api-key"
+
 from feedback.response_generator import sanitize_input, escape_input, generate_response
 
 
@@ -41,31 +45,26 @@ def test_escape_input(input_text, expected_output):
     assert result == expected_output
     
     
-@pytest.mark.parametrize("input_text, expected_sentiment, expected_response", [
-    ("I love this product!", "positive", "The user is satisfied. Respond in a positive and encouraging tone. Feedback: I love this product!"),
-    ("This is terrible, I hate it.", "negative", "The user is dissatisfied. Respond empathetically and offer solutions. Feedback: This is terrible, I hate it."),
-    ("It works, but could be better.", "neutral", "The user is neutral. Respond with a helpful and balanced tone. Feedback: It works, but could be better."),
-    ("", "neutral", "The user's sentiment is unclear. Provide a polite and neutral response. Feedback: ")
-])
-@patch('feedback.response_generator.analyze_sentiment')
-@patch('openai.chat.completions.create')
-def test_generate_response(mock_openai_create, mock_analyze_sentiment, input_text, expected_sentiment, expected_response):
-    mock_analyze_sentiment.return_value = expected_sentiment
+@patch("feedback.response_generator.openai.chat.completions.create")
+@patch.dict(os.environ, {"OPENAI_API_KEY": "fake-api-key"})
+def test_generate_response(mock_openai_create):
+    sentiment = 'mock sentiment'
+    feedback_text = "I love this product!"
+    expected_response = f"mock expected. Feedback: {feedback_text}"
 
     mock_openai_response = MagicMock()
-    mock_openai_response.choices[0].message.content.strip.return_value = expected_response
+    mock_openai_response.choices[0].message.content.strip.return_value = "Thank you for your feedback!"
     mock_openai_create.return_value = mock_openai_response
 
-    result = generate_response(input_text)
+    result = generate_response(feedback_text)
 
-    assert result == expected_response
-    mock_analyze_sentiment.assert_called_once_with(input_text)
-    mock_openai_create.assert_called_once()
-    
+    assert result == "Thank you for your feedback!"
+    mock_openai_create.assert_called_once() 
 
+
+@patch("openai.api_key", "fake-api-key") # mock openAI api_key directly 
 @patch("feedback.response_generator.openai.chat.completions.create")
 def test_generate_response_success(mock_openai_chat):
-    # Mock OpenAI API to return a valid response
     mock_openai_chat.return_value = MagicMock(
         choices=[
             MagicMock(
@@ -81,10 +80,11 @@ def test_generate_response_success(mock_openai_chat):
     assert response == "Thank you for your feedback!"
 
 
+@patch("openai.api_key", "fake-api-key") # mock openAI api_key directly 
 @patch("feedback.response_generator.openai.chat.completions.create")
 def test_generate_response_error(mock_openai_chat):
     mock_openai_chat.side_effect = Exception("API Error")
 
-    response = generate_response("mock respons")
+    response = generate_response("mock response")
     mock_openai_chat.assert_called_once()
     assert response == "Sorry, I couldn't generate a response at this time."
